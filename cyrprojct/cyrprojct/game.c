@@ -8,12 +8,14 @@
 #include "game.h"
 
 
-const uint8_t arr[255];
-const uint8_t* level = arr;
+//const uint8_t arr[255];
+//const uint8_t* level = arr;
 
 struct game {
 	uint8_t level;
 	uint8_t started;
+	uint8_t arr[255];
+	uint8_t* level = arr;
 };
 
 game_t game_create(uint8_t level) {
