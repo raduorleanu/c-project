@@ -9,42 +9,53 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#ifndef F_CPU
+#define F_CPU 16000000UL // 16 MHz clock speed
+#endif
+
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 #include "atmega2560_drivers.h"
 
 typedef struct game *game_t;
 
-game_t game_create();
+game_t game_create(int level);
 
-void light_led(game_t self, uint8_t led);
+void light_led(uint8_t led);
 
 void display_from_array(game_t self, uint8_t n);
 
-void flash_leds(game_t self, uint8_t pattern);
+void flash_leds();
 
-void delay(game_t self, uint16_t milliseconds);
+void delay();
 
-uint8_t read_input(game_t self);
+uint8_t read_input();
 
-uint8_t comapre_two_patterns(game_t self, uint8_t a, uint8_t b);
+uint8_t compare_two_patterns(uint8_t a, uint8_t b);
 
-void player_turn_manager(game_t self);
+int player_turn_manager(game_t self);
 
 void game_manager(game_t self);
 
-void lost(game_t self);
+void lost();
 
 void won();
 
-// init(); replaced by game_create
-
-uint8_t get_level(game_t self);
-
 void fill_level_array(game_t self);
 
-uint8_t generate_random(game_t self);
+uint8_t generate_random();
+
+int get_value_from_arr (game_t self, int index);
+
+int get_level(game_t self);
+
+void set_level(game_t self, int newlevel);
+
+int get_started(game_t self);
+
+void set_started(game_t self, int newstarted);
 
 #endif /* GAME_H_ */
